@@ -44,7 +44,7 @@ Date        : {DATE}\n\
                 # reg['Bit{i}'.format(i=i)] = 'PIN{i}'.format(i = i)
                 reg['Bit{i}'.format(i=i)] = 'PIN'+(reg['Bit{i}'.format(i=i)])[(len(reg['Bit{i}'.format(i=i)])-2):len(reg['Bit{i}'.format(i=i)])]
         sfr_defs_update_handler.write(unions_template.format(Name = reg['Name'], Bit0 = reg['Bit0'], Bit1 = reg['Bit1'], Bit2 = reg['Bit2'],\
-            Bit3 = reg['Bit3'], Bit4 = reg['Bit4'], Bit5 = reg['Bit5'], Bit6 = reg['Bit6'], Bit7 = reg['Bit7']))
+            Bit3 = reg['Bit3'], Bit4 = reg['Bit4'], Bit5 = reg['Bit5'], Bit6 = reg['Bit6'], Bit7 = reg['Bit7']).replace('- ', ''))
         sfr_defs_update_handler.write(typedef_template_for_defs_with_bits_defs.replace('NameToBeReplaced',\
                     reg['Name']).replace('AddressToBeReplaced' , reg['Address']))
         sfr_defs_update_handler.write('/*{Name} Bit Position Macros*/\n'.format(Name = reg['Name']))
@@ -69,13 +69,4 @@ Date        : {DATE}\n\
     for reg in defs_dicts_without_bits_defs:
         sfr_defs_update_handler.write('/*{Description}*/\n'.format(Description = reg['description']))
         sfr_defs_update_handler.write(typedef_template_for_defs_without_bits_defs.replace('NameToBeReplaced',  reg['Name']).replace('AddressToBeReplaced' , reg['Address']) + '\n')
-
-
-#For Reserved bits remove hyphens
-txt = ''
-with open(result_file_name, 'r') as sfr_defs_update_handler:
-    txt = sfr_defs_update_handler.read()
-txt = txt.replace('- ', '')
-with open(result_file_name, 'w') as sfr_defs_update_handler:
-    sfr_defs_update_handler.write(txt)
     sfr_defs_update_handler.write("#endif /* SFR_DEFS_H_ */")
