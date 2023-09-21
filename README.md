@@ -1,2 +1,2 @@
-# Rregister-file-definition-for-Atmega32
+# Register-file-definition-for-Atmega32
 Having a large number of libraries, using python you can totally automate work that would take days or weeks to complete. Here is my totally automated generation of register file definition of Atmega32 using the summary table provided in the Atmega32 datasheet. the generated file is over 1500 lines including comments and white spaces. here provided both the python code used for generation which is only about 80 lines and the freshly generated register file definition.
